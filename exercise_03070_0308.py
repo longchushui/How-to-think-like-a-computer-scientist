@@ -16,3 +16,19 @@ for i in data:
     pirate.forward(100)
     
 wn.mainloop()                # wait for user to close window
+
+# Enhance your program above to also tell us what the drunk pirate’s heading is after 
+# he has finished stumbling around. (Assume he begins at heading 0).
+
+total = 0 # assign zero to total
+
+# use a for loop to add up all angles
+for i in data:        
+    total = total + i
+    
+# to get the direction the drunk pirate is heading use modulo    
+direction = total % 360 
+
+print("The drunk pirate is heading after" + str(direction) + " degrees.")
+
+
