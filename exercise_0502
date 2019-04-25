@@ -1,0 +1,37 @@
+# You go on a wonderful holiday (perhaps to jail, if you don’t like happy exercises) leaving on day number 3 
+# (a Wednesday). You return home after 137 sleeps. Write a general version of the program which asks for the 
+# starting day number, and the length of your stay, and it will tell you the name of day of the week you will return on.
+
+# I use the function from the previous exercise
+def day_name(day_number):
+    """ The function day_name() returns the day_name {Sunday-Saturday} given 
+        the day_number {0-6}.
+    """
+    if day_number == 0:
+        print("Sunday")
+    elif day_number == 1:
+        print("Monday")
+    elif day_number == 2:
+        print("Tuesday")
+    elif day_number == 3:
+        print("Wednesday")
+    elif day_number == 4:
+        print("Thursday")
+    elif day_number == 5:
+        print("Friday")
+    elif day_number == 6:
+        print("Saturday")
+    else:
+        print("Give a number between 0 and 6.")
+
+
+def return_day(start_day, length_of_stay):
+    """ The function start_day() uses the start_day {0-6} and the length_of_stay in 
+        number of days and returns on which day of the week you will return.
+    """
+    return_day = (start_day + length_of_stay % 7) % 7
+    return day_name(return_day)  # Call the function from the previous exercise to show the name of the day of the week.
+
+
+return_day(6, 137)
+
