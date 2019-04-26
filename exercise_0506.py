@@ -19,16 +19,28 @@ def grade(mark):
     """ The function grade() returns the grade for a given mark.
     """
     if mark < 40:
-        print("F3")
+        grade = "F3"
     elif mark < 45:
-        print("F2")
+        grade = "F2"
     elif mark < 50:
-        print("F1 Supp")
+        grade = "F1 Supp"
     elif mark < 60:
-        print("Third")
+        grade = "Third"
     elif mark < 70:
-        print("Second")
+        grade = "Second"
     elif mark < 75:
-        print("Upper Second")
+        grade = "Upper Second"
     elif mark >= 75:
-        print("First") 
+        grade = "First"
+    return grade
+
+
+# The list xs represents different marks.
+xs = [83, 75, 74.9, 70, 69.9, 65, 60, 59.9, 55, 50, 49.9, 45, 44.9, 40, 39.9, 2, 0]
+
+
+# Test the function grade for all the elements in the list called xs:
+for i in range(len(xs)):
+    mark = xs[i]
+    grades = grade(xs[i])
+    print(str(mark) + " " +  grades)
