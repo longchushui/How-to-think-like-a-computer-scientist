@@ -52,6 +52,39 @@ def test_suite():
     test(to_secs(0, -10, 10) == -590)
     test(to_secs(2.5, 0, 10.71) == 9010)   # tests for exercise 08
     test(to_secs(2.433,0,0) == 8758)
+    test(hours_in(9010) == 2)                  # tests for exercise 09
+    test(minutes_in(9010) == 30)
+    test(seconds_in(9010) == 10)
+    test(compare(5, 4) == 1)                   # tests for exercise 11
+    test(compare(7, 7) == 0)
+    test(compare(2, 3) == -1)
+    test(compare(42, 1) == 1)
+    test(hypotenuse(3, 4) == 5.0)              # tests for exercise 12
+    test(hypotenuse(12, 5) == 13.0)
+    test(hypotenuse(24, 7) == 25.0)
+    test(hypotenuse(9, 12) == 15.0)
+    test(slope(5, 3, 4, 2) == 1.0)             # tests for exercise 13
+    test(slope(1, 2, 3, 2) == 0.0)
+    test(slope(1, 2, 3, 3) == 0.5)
+    test(slope(2, 4, 1, 2) == 2.0)
+    test(intercept(1, 6, 3, 12) == 3.0)
+    test(intercept(6, 1, 1, 6) == 7.0)
+    test(intercept(4, 6, 12, 8) == 5.0)
+    test(is_even(2) == True)                   # tests for exercise 14
+    test(is_even(3) == False)
+    test(is_even(0) == True)
+    test(is_even(-2) == True)
+    test(is_odd(2) == False)                   # tests for exercise 15
+    test(is_odd(3) == True)
+    test(is_odd(0) == False)
+    test(is_odd(-2) == False)
+    test(is_factor(3, 12))                     # tests for exercise 16
+    test(not is_factor(5, 12))
+    test(is_factor(7, 14))
+    test(not is_factor(7, 15))
+    test(is_factor(1, 15))
+    test(is_factor(15, 15))
+    test(not is_factor(25, 15))
 
 
 
@@ -164,6 +197,96 @@ def to_secs(hours, minutes, seconds):
     sec_h = hours * 60 * 60
     sec_m = minutes * 60
     return sec_h + sec_m + seconds
+
+# Exercise 08: Extend to_secs so that it can cope with real values as inputs. It should 
+# always return an integer number of seconds (truncated towards zero):
+
+# Exercise 09: Write three functions that are the “inverses” of to_secs:
+# 1) hours_in returns the whole integer number of hours represented by a total number of
+#    seconds.
+# 2) minutes_in returns the whole integer number of left over minutes in a total number 
+#    of seconds, once the hours have been taken out.
+# 3) seconds_in returns the left over seconds represented by a total number of seconds.
+# You may assume that the total number of seconds passed to these functions is an integer.
+
+def hours_in(seconds):
+    return (seconds // 60) // 60
+ 
+    
+def minutes_in(seconds):
+    sec_m = seconds - to_secs(hours_in(seconds), 0, 0)
+    return sec_m // 60
+
+
+def seconds_in(seconds):
+    return seconds - to_secs(hours_in(seconds), minutes_in(seconds), 0)
+
+
+# Exercise 11: Write a compare function that returns 1 if a > b, 0 if a == b, 
+# and -1 if a < b
+
+def compare(a, b):
+    if a == b:
+        return 0
+    elif a < b:
+        return -1
+    elif a > b:
+        return 1
+
+
+# Exercise 12: Write a function called hypotenuse that returns the length of the 
+# hypotenuse of a right triangle given the lengths of the two legs as parameters:
+
+def hypotenuse(a, b):
+    from math import sqrt
+    return sqrt(a ** 2 + b ** 2)
+
+
+# Exercise 13: Write a function slope(x1, y1, x2, y2) that returns the slope of the 
+# line through the points (x1, y1) and (x2, y2).
+# Then use a call to slope in a new function named intercept(x1, y1, x2, y2) that 
+# returns the y-intercept of the line through the points (x1, y1) and (x2, y2)
+
+def slope(x1, y1, x2, y2):
+    return (y2 - y1) / (x2 - x1)
+    
+
+def intercept(x1, y1, x2, y2):
+    m = slope(x1, y1, x2, y2)
+    return y1 - (m * x1)
+    
+    
+# Exercise 14: Write a function called is_even(n) that takes an integer as an argument 
+# and returns True if the argument is an even number and False if it is odd
+
+def is_even(n):
+    """ The function is_even(n) takes an integer as an argument and returns True if the
+        argument is an even number and False if it is odd.
+    """
+    return n % 2 == 0
+
+# Exercise 15: Now write the function is_odd(n) that returns True when n is odd and False 
+# otherwise. Include unit tests for this function too.
+
+def is_odd(n):
+    """ The function is_odd(n) takes an integer as an argument and returns True if the
+        argument is an odd number and False if it is even.
+    """
+    return n % 2 == 1
+    
+# Finally, modify it so that it uses a call to is_even to determine if its argument is 
+# an odd integer, and ensure that its test still pass
+
+def is_odd(n):
+    """ The function is_odd(n) takes an integer as an argument and returns True if the
+        argument is an odd number and False if it is even.
+    """
+    return not is_even(n)
+    
+# exercise 16: Write a function is_factor(f, n). 
+
+def is_factor(f, n):
+    return 0
 
 
 # Exercise 08: Extend to_secs so that it can cope with real values as inputs. It should 
