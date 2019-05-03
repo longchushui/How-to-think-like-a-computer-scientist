@@ -31,6 +31,16 @@ def test_suite():
     test(is_prime(11))                                     # tests for exercise 10                      
     test(not is_prime(35))
     test(is_prime(19911121))
+    test(num_digits(0) == 1)                               # tests for exercise 14
+    test(num_digits(-12345) == 5)
+    test(num_even_digits(123456) == 3)                     # tests for exercise 15
+    test(num_even_digits(2468) == 4)
+    test(num_even_digits(1357) == 0)
+    test(num_even_digits(0) == 1)    
+    test(sum_of_squares([2, 3, 4]) == 29)                  # tests for exercise 16
+    test(sum_of_squares([ ]) == 0)
+    test(sum_of_squares([2, -3, 4]) == 29)
+
 
 # Exercise 1: Write a function to count how many odd numbers are in a list.
 
@@ -177,5 +187,52 @@ draw_something(path2, house)
 
 wn.mainloop() # wait for user to close screen
 
+# Exercise 14: What will num_digits(0) return? Modify it to return 1 for this case. 
+# Why does a call to num_digits(-24) result in an infinite loop? (hint: -1//10 evaluates 
+# to -1) Modify num_digits so that it works correctly with any integer value. 
+
+def num_digits(n): 
+    """ The function num_digits(n) counts the number of decimal digits in a postive 
+        integer. For example a call to print(num_digits(710)) will print 3.
+    """
+    count = 0
+    n = abs(n)
+    if n == 0:
+        count = 1
+    while n != 0:
+        count += 1
+        n = n // 10
+    return count
+
+# Exercise 15: Write a function num_even_digits(n) that counts the number of even digits 
+# in n.
+
+def num_even_digits(n):
+    """ The function num_even_digits(n) counts the number of even digits in n. For example
+        num_even_digits(123456) returns 3, representing 3 even digits.
+    """
+    count = 0
+    if n == 0:
+        count = 1
+    while n > 0:
+        if n % 2 == 0:
+            count += 1
+        n = n // 10
+    return count
+    
+    
+# Exercise 16: Write a function sum_of_squares(xs) that computes the sum of the squares 
+# of the numbers in the list xs. For example, sum_of_squares([2, 3, 4]) should return 
+# 4+9+16 which is 29   
+
+def sum_of_squares(xs):
+    sum = 0
+    for i in xs:
+        sum += i ** 2
+    return sum        
+
+
     
 test_suite()        # Here is the call to run the tests
+
+
